@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="img/logo (1).ico" type="image/x-icon" />
+    <title>Yummy</title>
+    <link rel="stylesheet" href="css/all.min.css" />
+    <link rel="stylesheet" href="css/output.css" />
+  </head>
+  <body class="bg-[#0D0D0D] text-[#f9f6f6]">
+    <aside class="z-30 fixed top-0 -left-64 h-screen flex">
+      <div class="nav whitespace-nowrap">
+        <div
+          class="p-6 w-64 h-screen flex flex-col justify-between bg-[#0D0D0D]"
+        >
+          <ul class="overflow-hidden relative">
+            <li class="py-2 relative top-72 search"><a class="cursor-pointer">Search</a></li>
+            <li class="py-2 relative top-72 categories"><a class="cursor-pointer">Categories</a></li>
+            <li class="py-2 relative top-72 area"><a class="cursor-pointer">Area</a></li>
+            <li class="py-2 relative top-72 ingredients"><a class="cursor-pointer">Ingredients</a></li>
+            <li class="py-2 relative top-72 contact"><a class="cursor-pointer">Contact Us</a></li>
+          </ul>
+          <div class="py-4">
+            <span class="flex gap-1 py-1"
+              ><i class="fa-brands fa-facebook cursor-pointer"></i
+              ><i class="fa-brands fa-twitter cursor-pointer"></i
+              ><i class="fa-solid fa-globe cursor-pointer"></i
+            ></span>
+            <p class="w-56 whitespace-normal">
+              Copyright Â© 2019 All Rights Reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div
+        class="control py-6 bg-white flex flex-col justify-between text-black"
+      >
+        <div class="img w-12 mx-2">
+          <img class="w-full" src="img/logo.png" alt="yummy logo" />
+        </div>
+        <span class="menu-toggler mx-auto text-3xl cursor-pointer"
+          ><i class="bars-icon fa-solid fa-bars"></i>
+          <i class="hidden x-icon fa-solid fa-x"></i
+        ></span>
+        <span class="flex flex-col mx-auto gap-1"
+          ><i class="fa-solid fa-globe cursor-pointer"></i>
+          <i class="fa-solid fa-share-nodes cursor-pointer"></i
+        ></span>
+      </div>
+    </aside>
+    <main class="container relative">
+        <section class="loading flex justify-center items-center hidden z-20 inset-0 h-screen bg-[#0D0D0D]/80"><span class="loader"></span></section>
+        <section class="search-section grid-cols-2 gap-4 mx-28 hidden">
+            <input type="text" id="nameSearch" placeholder="Search By Name" autocomplete="off" class="rounded-md bg-transparent text-lg my-6 p-2 border border-gray-300   focus:ring-4  focus:ring-sky-800/70  focus:outline-none ">
+            <input type="text" id="letterSearch" placeholder="Search By First Letter" autocomplete="off" maxlength="1" class="rounded-md bg-transparent text-lg my-6 p-2 border border-gray-300   focus:ring-4  focus:ring-sky-800/70  focus:outline-none ">
+        </section>
+      <section id="meals" class="grid grid-cols-4 gap-5 my-16 mx-28">
+        
+      </section>
+    </main>
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script src="js/index.js"></script>
+  </body>
+</html>
