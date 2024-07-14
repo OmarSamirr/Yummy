@@ -3,6 +3,8 @@
 //Global Variables
 let data = {};
 let meal = {};
+const inputs = document.querySelectorAll("#contact input");
+const warnings = document.querySelectorAll("#contact span");
 
 //?Events
 //Side Bar
@@ -28,6 +30,21 @@ function closeSidebar() {
 }
 $(".x-icon").on("click", () => {
   closeSidebar();
+});
+$("#contact input").on("blur", function () {
+  validate(this);
+  if (
+    validate(inputs[0]) &&
+    validate(inputs[1]) &&
+    validate(inputs[2]) &&
+    validate(inputs[3]) &&
+    validate(inputs[4]) &&
+    validate(inputs[5])
+  ) {
+    $("#contact button").removeAttr("disabled");
+  } else {
+    $("#contact button").attr("disabled", "disabled");
+  }
 });
 
 //!Sidebar links
@@ -67,7 +84,11 @@ $(".ingredients").on("click", () => {
 });
 
 //?Contact
-$(".contact").on("click", () => {});
+$(".contact").on("click", () => {
+  removeMeals();
+  $("#contact").removeClass("hidden");
+  closeSidebar();
+});
 
 //Search
 $("#nameSearch").on("input", function () {
@@ -98,7 +119,10 @@ async function getMeals(
 
     data = data.meals;
 
-    removeMeals();
+    $("#categories").html("");
+    $("#details").html("");
+    $("#area").html("");
+    $("#ingredients").html("");
     displayMeals();
   } catch (error) {
     alert(error);
@@ -153,7 +177,10 @@ function displayCategories() {
 
 function displayMeals() {
   let cartona = "";
-  for (let i = 0; i < data?.length; i++) {
+  let limit;
+  data?.length > 20 ? (limit = 20) : (limit = data?.length);
+
+  for (let i = 0; i < limit; i++) {
     cartona += `
         <div onclick="getMealDetails(${data[
           i
@@ -176,17 +203,17 @@ function displayMeals() {
         `;
   }
   $("#meals").html(cartona);
-  $("#meals").removeClass('hidden');
+  $("#meals").removeClass("hidden");
 }
 
 function removeMeals() {
   $("#meals").html("");
-  $("#meals").addClass('hidden');
+  $("#meals").addClass("hidden");
   $("#categories").html("");
   $(".search-section").addClass("hidden");
-  $("#details").html('');
-  $("#area").html('');
-  $("#ingredients").html('');
+  $("#details").html("");
+  $("#area").html("");
+  $("#ingredients").html("");
 }
 
 async function getMealDetails(id) {
@@ -292,7 +319,7 @@ function showCategory(id) {
   getMeals("c", category.strCategory, "filter");
 }
 
-async function getAreas(){
+async function getAreas() {
   $(".loading").removeClass("hidden");
   $(".loading").addClass("fixed");
 
@@ -315,7 +342,7 @@ async function getAreas(){
   }
 }
 
-function displayAreas(){
+function displayAreas() {
   let cartona = "";
   for (let i = 0; i < data?.length; i++) {
     cartona += `<div onclick="showArea(${i})" class="cursor-pointer">
@@ -327,20 +354,18 @@ function displayAreas(){
   }
   $("#area").html(cartona);
   $("#area").html(cartona);
-
 }
 
-function showArea(id){
+function showArea(id) {
   //Loading Screen
   $(".loading").removeClass("hidden");
   $(".loading").addClass("fixed");
 
   //get meals
   getMeals("a", data[id].strArea, "filter");
-  
 }
 
-async function getIngredients(){
+async function getIngredients() {
   $(".loading").removeClass("hidden");
   $(".loading").addClass("fixed");
 
@@ -363,7 +388,7 @@ async function getIngredients(){
   }
 }
 
-function displayIngredients(){
+function displayIngredients() {
   let cartona = "";
   for (let i = 0; i < 20; i++) {
     cartona += `<div onclick="showIngredients(${i})" class="cursor-pointer">
@@ -376,15 +401,33 @@ function displayIngredients(){
   }
   $("#ingredients").html(cartona);
   $("#ingredients").html(cartona);
-
 }
 
-function showIngredients(id){
+function showIngredients(id) {
   //Loading Screen
   $(".loading").removeClass("hidden");
   $(".loading").addClass("fixed");
 
   //get meals
   getMeals("i", data[id].strIngredient, "filter");
-  
+}
+
+function validate(element) {
+  const text = element.value;
+  const regex = {
+    Name: /^(?:[a-zA-Z0-9\s@,=%$#&_\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDCF\uFDF0-\uFDFF\uFE70-\uFEFF]|(?:\uD802[\uDE60-\uDE9F]|\uD83B[\uDE00-\uDEFF])){2,20}$/,
+    Email:
+      /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/,
+    Phone: /^(00201|\+201|01)[0-2,5]{1}[0-9]{8}$/,
+    Age: /^([1-7][0-9]|80)$/,
+    Pass: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+    rePass: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+  };
+  if (regex[element.id].test(text)) {
+    $("#" + element.id + "V").addClass("hidden");
+    return true;
+  } else {
+    $("#" + element.id + "V").removeClass("hidden");
+    return false;
+  }
 }
