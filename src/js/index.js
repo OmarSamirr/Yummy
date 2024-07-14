@@ -33,26 +33,38 @@ $(".x-icon").on("click", () => {
 //!Sidebar links
 //?Search
 $(".search").on("click", () => {
+  removeMeals();
   $(".search-section").addClass("grid");
   $(".search-section").removeClass("hidden");
   closeSidebar();
-  removeMeals();
 });
 
 //?Categories
 $(".categories").on("click", () => {
+  removeMeals();
   $("#categories").addClass("grid");
   $("#categories").removeClass("hidden");
   closeSidebar();
-  removeMeals();
   getCategories();
 });
 
 //?Area
-$(".area").on("click", () => {});
+$(".area").on("click", () => {
+  removeMeals();
+  $("#area").addClass("grid");
+  $("#area").removeClass("hidden");
+  closeSidebar();
+  getAreas();
+});
 
 //?Ingredients
-$(".ingredients").on("click", () => {});
+$(".ingredients").on("click", () => {
+  removeMeals();
+  $("#ingredients").addClass("grid");
+  $("#ingredients").removeClass("hidden");
+  closeSidebar();
+  getIngredients();
+});
 
 //?Contact
 $(".contact").on("click", () => {});
@@ -70,7 +82,11 @@ $("#letterSearch").on("input", function () {
 getMeals();
 
 //!Functions
-async function getMeals(searchParameter = "s", searchValue = "", endpoint = "search") {
+async function getMeals(
+  searchParameter = "s",
+  searchValue = "",
+  endpoint = "search"
+) {
   $(".loading").removeClass("hidden");
   $(".loading").addClass("fixed");
   try {
@@ -82,7 +98,7 @@ async function getMeals(searchParameter = "s", searchValue = "", endpoint = "sea
 
     data = data.meals;
 
-    removeCategories();
+    removeMeals();
     displayMeals();
   } catch (error) {
     alert(error);
@@ -139,56 +155,69 @@ function displayMeals() {
   let cartona = "";
   for (let i = 0; i < data?.length; i++) {
     cartona += `
-        <div onclick="showDetails(${data[i].idMeal})" class="group/container overflow-hidden rounded-lg cursor-pointer">
+        <div onclick="getMealDetails(${data[
+          i
+        ].idMeal.toString()})" class="group/container overflow-hidden rounded-lg cursor-pointer">
           <div class="relative">
-            <img class="w-full" src="${data[i].strMealThumb}" alt="${data[i].strMeal}" />
+            <img class="w-full" src="${data[i].strMealThumb}" alt="${
+      data[i].strMeal
+    }" />
           </div>
           <div
             class="inner-container group-hover/container:-top-full duration-500 h-full w-full relative top-0"
           >
             <div class="absolute inset-0 bg-neutral-300/70 flex items-center">
-              <h2 class="mx-3 text-black text-2xl font-semibold">${data[i].strMeal}</h2>
+              <h2 class="mx-3 text-black text-2xl font-semibold">${
+                data[i].strMeal
+              }</h2>
             </div>
           </div>
         </div>
         `;
   }
   $("#meals").html(cartona);
+  $("#meals").removeClass('hidden');
 }
 
 function removeMeals() {
   $("#meals").html("");
-}
-
-function removeCategories() {
+  $("#meals").addClass('hidden');
   $("#categories").html("");
+  $(".search-section").addClass("hidden");
+  $("#details").html('');
+  $("#area").html('');
+  $("#ingredients").html('');
 }
 
-async function getMealDetails(id){
-  try{
-    const response = await fetch(
-    `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
-  );
-  data = await response.json();
-
-  data = data.meals;
-
-  console.log(data);
-}
-  catch(error){
-    alert(error)
-  }
-   meal = data;
-}
-
- function showDetails(id) {
-  //Loading Screen
+async function getMealDetails(id) {
   $(".loading").removeClass("hidden");
   $(".loading").addClass("fixed");
 
-  //Save Clicked meal Data
-  getMealDetails(id);
-   
+  try {
+    const response = await fetch(
+      `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
+    );
+
+    meal = await response.json();
+
+    meal = meal.meals;
+
+    meal = meal[0];
+
+    removeMeals();
+    showDetails();
+  } catch (error) {
+    alert(error);
+  } finally {
+    $(".loading").addClass("hidden");
+    $(".loading").removeClass("fixed");
+  }
+}
+
+function showDetails() {
+  //Loading Screen
+  $(".loading").removeClass("hidden");
+  $(".loading").addClass("fixed");
 
   //Show Details
   removeMeals();
@@ -240,7 +269,8 @@ async function getMealDetails(id){
             <a target="_blank" href="${meal.strYoutube}" class="bg-red-500 hover:bg-red-600 duration-300 p-2 rounded">Youtube</a>
           </div>`;
 
-  $("#details").html(box);
+  document.getElementById("details").innerHTML = box;
+
   // Remove Loading
   $(".loading").addClass("hidden");
   $(".loading").removeClass("fixed");
@@ -258,7 +288,103 @@ function showCategory(id) {
       category = item;
     }
   }
-  console.log(category);
   //get meals
-  getMeals("c", category.strCategory, 'filter');
+  getMeals("c", category.strCategory, "filter");
+}
+
+async function getAreas(){
+  $(".loading").removeClass("hidden");
+  $(".loading").addClass("fixed");
+
+  try {
+    const response = await fetch(
+      `https://www.themealdb.com/api/json/v1/1/list.php?a=list`
+    );
+
+    data = await response.json();
+
+    data = data.meals;
+
+    removeMeals();
+    displayAreas();
+  } catch (error) {
+    alert(error);
+  } finally {
+    $(".loading").addClass("hidden");
+    $(".loading").removeClass("fixed");
+  }
+}
+
+function displayAreas(){
+  let cartona = "";
+  for (let i = 0; i < data?.length; i++) {
+    cartona += `<div onclick="showArea(${i})" class="cursor-pointer">
+            <div class="relative text-center">
+              <i class="fa-solid fa-house-laptop fa-4x"></i>
+              <h3 class="text-3xl font-semibold">${data[i].strArea}</h3>
+            </div>
+          </div>`;
+  }
+  $("#area").html(cartona);
+  $("#area").html(cartona);
+
+}
+
+function showArea(id){
+  //Loading Screen
+  $(".loading").removeClass("hidden");
+  $(".loading").addClass("fixed");
+
+  //get meals
+  getMeals("a", data[id].strArea, "filter");
+  
+}
+
+async function getIngredients(){
+  $(".loading").removeClass("hidden");
+  $(".loading").addClass("fixed");
+
+  try {
+    const response = await fetch(
+      `https://www.themealdb.com/api/json/v1/1/list.php?i=list`
+    );
+
+    data = await response.json();
+
+    data = data.meals;
+
+    removeMeals();
+    displayIngredients();
+  } catch (error) {
+    alert(error);
+  } finally {
+    $(".loading").addClass("hidden");
+    $(".loading").removeClass("fixed");
+  }
+}
+
+function displayIngredients(){
+  let cartona = "";
+  for (let i = 0; i < 20; i++) {
+    cartona += `<div onclick="showIngredients(${i})" class="cursor-pointer">
+            <div class="relative text-center">
+              <i class="fa-solid fa-drumstick-bite fa-4x"></i>
+              <h3 class="text-3xl font-semibold">${data[i].strIngredient}</h3>
+              <p class="text-center line-clamp-3">${data[i].strDescription}</p>
+            </div>
+          </div>`;
+  }
+  $("#ingredients").html(cartona);
+  $("#ingredients").html(cartona);
+
+}
+
+function showIngredients(id){
+  //Loading Screen
+  $(".loading").removeClass("hidden");
+  $(".loading").addClass("fixed");
+
+  //get meals
+  getMeals("i", data[id].strIngredient, "filter");
+  
 }
