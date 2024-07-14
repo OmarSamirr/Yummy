@@ -51,13 +51,19 @@
     </aside>
     <main class="container relative">
         <section class="loading flex justify-center items-center hidden z-20 inset-0 h-screen bg-[#0D0D0D]/80"><span class="loader"></span></section>
+        
         <section class="search-section grid-cols-2 gap-4 mx-28 hidden">
             <input type="text" id="nameSearch" placeholder="Search By Name" autocomplete="off" class="rounded-md bg-transparent text-lg my-6 p-2 border border-gray-300   focus:ring-4  focus:ring-sky-800/70  focus:outline-none ">
             <input type="text" id="letterSearch" placeholder="Search By First Letter" autocomplete="off" maxlength="1" class="rounded-md bg-transparent text-lg my-6 p-2 border border-gray-300   focus:ring-4  focus:ring-sky-800/70  focus:outline-none ">
         </section>
-      <section id="meals" class="grid grid-cols-4 gap-5 my-16 mx-28">
         
-      </section>
+        <section id="meals" class="grid sm:grid-cols-4 grid-cols-1 gap-5 my-16 mx-28 "></section>
+        
+        <section id="details" class="grid sm:grid-cols-[33%_minmax(0,1fr)] grid-cols-1 gap-5 my-14 mx-28"></section>
+
+        <section id="categories" class="sm:grid-cols-4 grid-cols-1 gap-5 my-16 mx-28 hidden">
+         
+        </section>
     </main>
     <script src="js/jquery-3.7.1.min.js"></script>
     <script src="js/index.js"></script>

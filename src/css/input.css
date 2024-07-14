@@ -21,3 +21,7 @@
       transform: rotate(360deg);
     }
   } 
+
+  .title{
+    @apply text-3xl font-semibold mb-3
+  }
