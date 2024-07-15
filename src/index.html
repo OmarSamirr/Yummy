@@ -111,86 +111,90 @@
         class="flex flex-col gap-4 justify-center items-center h-screen hidden"
       >
         <div class="grid sm:grid-cols-2 grid-cols-1 w-2/3 gap-5 mx-28">
-          <div ><input
-            id="Name"
-            class="p-2 w-full overflow-auto rounded-md focus:ring-4 focus:ring-sky-800/70 focus:outline-none text-lg text-black"
-            placeholder="Enter Your Name"
-            type="text"
-          />
-          <span
-            id="NameV"
-            class="text-center relative block w-full bg-red-100 text-black p-4 m-1 rounded hidden"
-            >Special characters and numbers not allowed</span
-          ></div>
-
-          <div>
+          <div class="flex flex-col gap-1">
             <input
-            id="Email"
-            class="p-2 w-full rounded-md focus:ring-4 focus:ring-sky-800/70 focus:outline-none text-lg text-black"
-            placeholder="Enter Your Email"
-            type="email"
-          />
-          <span
-            id="EmailV"
-            class="text-center w-full block bg-red-100 text-black p-4 m-1 rounded hidden"
-            >Email not valid *exemple@yyy.zzz</span
-          >
+              id="Name"
+              class="p-2 w-full overflow-auto rounded-md focus:ring-4 focus:ring-sky-800/70 focus:outline-none text-lg text-black"
+              placeholder="Enter Your Name"
+              type="text"
+            />
+            <span
+              id="NameV"
+              class="text-center relative block w-full bg-red-100 text-black p-4 rounded hidden"
+              >Special characters and numbers not allowed</span
+            >
           </div>
 
-          <div>
+          <div class="flex flex-col gap-1">
             <input
-            id="Phone"
-            class="p-2 w-full rounded-md focus:ring-4 focus:ring-sky-800/70 focus:outline-none text-lg text-black"
-            placeholder="Enter Your Phone"
-            type="text"
-          />
-          <span
-            id="PhoneV"
-            class="text-center w-full block bg-red-100 text-black p-4 m-1 rounded hidden"
-            >Enter valid Phone Number</span
-          >
+              id="Email"
+              class="p-2 w-full rounded-md focus:ring-4 focus:ring-sky-800/70 focus:outline-none text-lg text-black"
+              placeholder="Enter Your Email"
+              type="email"
+            />
+            <span
+              id="EmailV"
+              class="text-center w-full block bg-red-100 text-black p-4 rounded hidden"
+              >Email not valid *exemple@yyy.zzz</span
+            >
           </div>
 
-          <div>
+          <div class="flex flex-col gap-1">
             <input
-            id="Age"
-            class="p-2 w-full rounded-md focus:ring-4 focus:ring-sky-800/70 focus:outline-none text-lg text-black"
-            placeholder="Enter Your Age"
-            type="number"
-          />
-          <span
-            id="AgeV"
-            class="text-center w-full block bg-red-100 text-black p-4 m-1 rounded hidden"
-            >Enter valid age</span
-          >
+              id="Phone"
+              class="p-2 w-full rounded-md focus:ring-4 focus:ring-sky-800/70 focus:outline-none text-lg text-black"
+              placeholder="Enter Your Phone"
+              type="text"
+            />
+            <span
+              id="PhoneV"
+              class="text-center w-full block bg-red-100 text-black p-4 rounded hidden"
+              >Enter valid Phone Number</span
+            >
           </div>
 
-          <div>
+          <div class="flex flex-col gap-1">
             <input
-            id="Pass"
-            class="p-2 w-full rounded-md focus:ring-4 focus:ring-sky-800/70 focus:outline-none text-lg text-black"
-            placeholder="Enter Your Password"
-            type="password"
-          />
-          <span
-            id="PassV"
-            class="text-center w-full block bg-red-100 text-black p-4 m-1 rounded hidden"
-            >Enter valid password *Minimum eight characters, at least one letter
-            and one number:*</span
-          >
+              id="Age"
+              class="p-2 w-full rounded-md focus:ring-4 focus:ring-sky-800/70 focus:outline-none text-lg text-black"
+              placeholder="Enter Your Age"
+              type="number"
+            />
+            <span
+              id="AgeV"
+              class="text-center w-full block bg-red-100 text-black p-4 rounded hidden"
+              >Enter valid age</span
+            >
           </div>
 
-          <div><input
-            id="rePass"
-            class="p-2 w-full rounded-md focus:ring-4 focus:ring-sky-800/70 focus:outline-none text-lg text-black"
-            placeholder="Re-enter Your Password"
-            type="password"
-          />
-          <span
-            id="rePassV"
-            class="text-center w-full block bg-red-100 text-black p-4 m-1 rounded hidden"
-            >Enter valid repassword</span
-          ></div>
+          <div class="flex flex-col gap-1">
+            <input
+              id="Pass"
+              class="p-2 w-full rounded-md focus:ring-4 focus:ring-sky-800/70 focus:outline-none text-lg text-black"
+              placeholder="Enter Your Password"
+              type="password"
+            />
+            <span
+              id="PassV"
+              class="text-center w-full block bg-red-100 text-black p-4 rounded hidden"
+              >Enter valid password *Minimum eight characters, at least one
+              letter and one number:*</span
+            >
+          </div>
+
+          <div class="flex flex-col gap-1">
+            <input
+              id="rePass"
+              class="p-2 w-full rounded-md focus:ring-4 focus:ring-sky-800/70 focus:outline-none text-lg text-black"
+              placeholder="Re-enter Your Password"
+              type="password"
+            />
+            <span
+              id="rePassV"
+              class="text-center w-full block bg-red-100 text-black p-4 rounded hidden"
+              >Enter valid repassword</span
+            >
+          </div>
         </div>
         <button
           disabled

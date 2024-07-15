@@ -31,15 +31,15 @@ function closeSidebar() {
 $(".x-icon").on("click", () => {
   closeSidebar();
 });
+//Validation
 $("#contact input").on("blur", function () {
-  validate(this);
   if (
     validate(inputs[0]) &&
     validate(inputs[1]) &&
     validate(inputs[2]) &&
     validate(inputs[3]) &&
     validate(inputs[4]) &&
-    validate(inputs[5])
+    validatePassword()
   ) {
     $("#contact button").removeAttr("disabled");
   } else {
@@ -214,6 +214,7 @@ function removeMeals() {
   $("#details").html("");
   $("#area").html("");
   $("#ingredients").html("");
+  $("#contact").addClass("hidden");
 }
 
 async function getMealDetails(id) {
@@ -421,13 +422,23 @@ function validate(element) {
     Phone: /^(00201|\+201|01)[0-2,5]{1}[0-9]{8}$/,
     Age: /^([1-7][0-9]|80)$/,
     Pass: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-    rePass: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
   };
   if (regex[element.id].test(text)) {
     $("#" + element.id + "V").addClass("hidden");
     return true;
   } else {
     $("#" + element.id + "V").removeClass("hidden");
+    return false;
+  }
+}
+
+function validatePassword(){
+  if (inputs[4].value === inputs[5].value) {
+    $("#rePassV").addClass("hidden");
+    return true;
+  }
+  else{
+    $("#rePassV").removeClass("hidden");
     return false;
   }
 }
